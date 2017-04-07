@@ -1,14 +1,18 @@
 <?php
-function importa($classe){
-     require $classe . '.php;';
+
+function importa($classe) {
+    require $classe . '.php';
 }
 
 spl_autoload_register('importa');
 
-$contrato = new Contrato('Alura', new date('Y-m-d'));
-
+date_default_timezone_set("America/Campo_Grande");
+$historico = new Historico();
+$contrato = new Contrato('Alura', date('Y-m-d'));
+$historico->addEstado($contrato->salvaEstado());
 echo "<pre>";
-
-echo var_dump($contrato);
-
+var_dump($contrato);
 $contrato->avanca();
+$historico->addEstado($contrato->salvaEstado());
+var_dump($contrato);
+var_dump($historico);
